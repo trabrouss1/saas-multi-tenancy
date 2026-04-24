@@ -2,6 +2,7 @@ package ci.trabrouss.saas.services.impl;
 
 import ci.trabrouss.saas.common.PageResponse;
 import ci.trabrouss.saas.entites.Category;
+import ci.trabrouss.saas.exceptions.DuplicateResourceException;
 import ci.trabrouss.saas.mappers.CategoryMapper;
 import ci.trabrouss.saas.repositories.CategoryRepository;
 import ci.trabrouss.saas.requests.CategoryRequest;
@@ -59,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     categoryOptional.ifPresent(e -> {
       log.debug("Category already exists");
-      throw new RuntimeException("Category already exists");
+      throw new DuplicateResourceException("Category already exists");
     });
   }
 
