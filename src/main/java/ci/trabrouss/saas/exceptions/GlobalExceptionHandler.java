@@ -38,6 +38,9 @@ public class GlobalExceptionHandler {
   private HttpStatus getHttpStatus(BusinessException ex) {
     if(ex instanceof DuplicateResourceException){
       return HttpStatus.CONFLICT;
+    } else if (ex instanceof UnauthorizedException) {
+      return HttpStatus.UNAUTHORIZED;
+      
     }
     return HttpStatus.BAD_REQUEST;
   }
