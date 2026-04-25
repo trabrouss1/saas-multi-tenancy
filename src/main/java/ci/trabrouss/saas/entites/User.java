@@ -22,6 +22,10 @@ import java.util.List;
 @Table(name = "users")
 public class User extends AbstractEntity implements UserDetails {
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "fk_company_id"))
+  private Tenant tenant;
+
   @Column(name = "username", unique = true, nullable = false)
   private String username;
   private String email;
@@ -36,4 +40,12 @@ public class User extends AbstractEntity implements UserDetails {
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(this.role.name()));
   }
+
+  public String getTenantId(){
+    if (this.tenant != null){
+      return this.tenant.getId();
+    }
+    return null;
+  }
+
 }
