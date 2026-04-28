@@ -57,6 +57,10 @@ public class GlobalExceptionHandler {
       return HttpStatus.CONFLICT;
     } else if (ex instanceof UnauthorizedException) {
       return HttpStatus.UNAUTHORIZED;
+    }else if (ex instanceof TenantProvisioningException) {
+      return HttpStatus.INTERNAL_SERVER_ERROR;
+    } else if (ex instanceof InvalidRequestException) {
+      return HttpStatus.BAD_REQUEST;
       
     }
     return HttpStatus.BAD_REQUEST;

@@ -2,6 +2,7 @@ package ci.trabrouss.saas.security;
 
 
 import ci.trabrouss.saas.config.TenantContext;
+import ci.trabrouss.saas.config.TenantSchemaResolver;
 import ci.trabrouss.saas.properties.JwtProperties;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -26,6 +27,7 @@ import java.util.Collections;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtTokenService jwtTokenService;
+  private final TenantSchemaResolver tenantSchemaResolver;
 
   @Override
   protected void doFilterInternal(final HttpServletRequest request,
@@ -47,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (tenantId != null) {
           // Stocker le tenant ID et le schemaName
           TenantContext.setCurrentTenant(tenantId);
-          final String schemaName = "this.tenantSchemaResolver.resolveTenantSchema(tenantId)";
+          final String schemaName = this.tenantSchemaResolver.resolveTenantSchema(tenantId);
           TenantContext.setCurrentSchema(schemaName);
         }
 

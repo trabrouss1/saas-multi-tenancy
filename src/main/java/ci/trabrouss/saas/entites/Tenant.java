@@ -22,7 +22,7 @@ public class Tenant extends AbstractEntity {
   @Column(name = "code", nullable = false, unique = true)
   private String code;
 
-  @Column(name = "code", nullable = false, unique = true)
+  @Column(name = "email", nullable = false, unique = true)
   private String email;
 
   @Enumerated(EnumType.STRING)
@@ -32,10 +32,13 @@ public class Tenant extends AbstractEntity {
   //Info initial de l'admin
   @Column(name = "admin_full_name", nullable = false)
   private String adminFullName;
+
   @Column(name = "admin_email", nullable = false, unique = true)
   private String adminEmail;
+
   @Column(name = "admin_username", nullable = false, unique = true)
   private String adminUsername;
+
   @Column(name = "admin_password", nullable = false)
   private String adminPassword;
 
